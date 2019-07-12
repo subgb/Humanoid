@@ -1,10 +1,10 @@
 {
-  "name": "humanoid-js",
-  "version": "1.0.1",
+  "name": "@subns/humanoid-js",
+  "version": "1.0.2",
   "description": "Node.js package to bypass WAF anti-bot JavaScript challenges",
   "repository": {
     "type": "git",
-    "url": "https://github.com/evyatarmeged/Humanoid"
+    "url": "https://github.com/subgb/Humanoid"
   },
   "main": "index.js",
   "scripts": {
@@ -24,7 +24,7 @@
     "captcha"
   ],
   "author": "Evyatar Meged",
-  "homepage": "https://github.com/evyatarmeged/Humanoid",
+  "homepage": "https://github.com/subgb/Humanoid",
   "license": "MIT",
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",

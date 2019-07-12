@@ -24,13 +24,13 @@ The session cookies can also be delegated to other bots to continue scraping cau
 ## Installation
 via npm:
 ```
-npm install --save humanoid-js
+npm install @subns/humanoid-js
 ```
 
 ## Usage
 Basic usage with promises:
 ```javascript
-const Humanoid = require("humanoid-js");
+const Humanoid = require("@subns/humanoid-js");
 
 let humanoid = new Humanoid();
 humanoid.get("https://www.cloudflare-protected.com")
