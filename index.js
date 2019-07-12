@@ -27,13 +27,13 @@ class Humanoid extends HumanoidReqHandler {
 		super.cookieJar = request.jar();
 	}
 	
-	_buildAnswerObject(values) {
-		let [vc, pass, answer] = [...values];
+	_buildAnswerObject(obj) {
 		return {
-			jschl_vc: vc,
-			pass: pass,
-			jschl_answer: answer
-		}
+			s: obj.s,
+			jschl_vc: obj.vc,
+			pass: obj.pass,
+			jschl_answer: obj.answer,
+		};
 	}
 	
 	async get(url, queryString=undefined, headers=undefined) {
@@ -80,7 +80,7 @@ class Humanoid extends HumanoidReqHandler {
 			// Wait the desired time;
 			await this._asyncTimeout(timeout);
 			let answerUrl = `${solution.origin}/cdn-cgi/l/chk_jschl`;
-			let answerObj = this._buildAnswerObject([solution.vc, solution.pass, solution.answer]);
+			let answerObj = this._buildAnswerObject(solution);
 			let headers = super._getRequestHeaders(answerUrl);
 			headers["Referer"] = response.origin;
 			

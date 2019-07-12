@@ -86,8 +86,9 @@ test("Clear cookies from jar", () => {
 })
 
 test("Build answer object 1", () => {
-	let answerObject = testHumanoid._buildAnswerObject([1.123123, 3.123123123, 2.19283918]);
+	let answerObject = testHumanoid._buildAnswerObject({s: 'sssss', vc: 1.123123, pass: 3.123123123, answer: 2.19283918});
 	expect(answerObject).toMatchObject({
+		s: 'sssss',
 		jschl_vc: 1.123123,
 		pass: 3.123123123,
 		jschl_answer: 2.19283918
@@ -95,8 +96,9 @@ test("Build answer object 1", () => {
 })
 
 test("Build answer object 2", () => {
-	let answerObject = testHumanoid._buildAnswerObject([1, 2, 3]);
+	let answerObject = testHumanoid._buildAnswerObject({s: 's', vc: 1, pass: 2, answer: 3});
 	expect(answerObject).toMatchObject({
+		s: 's',
 		jschl_vc: 1,
 		pass: 2,
 		jschl_answer: 3
@@ -112,9 +114,10 @@ test("Extract timeout from script", () => {
 
 test("Extract input form values", () => {
 	let challengeHTML = fs.readFileSync(`${__dirname}/../page_samples/sample_challenge_page.html`);
-	let [a, b] = Solver._extractInputValuesFromHTML(challengeHTML);
-	expect(a).not.toBeNull();
-	expect(b).not.toBeNull();
+	let {s, vc, pass} = Solver._extractInputValuesFromHTML(challengeHTML);
+	expect(s).not.toBeNull();
+	expect(vc).not.toBeNull();
+	expect(pass).not.toBeNull();
 })
 
 test("Extract challenge", () => {

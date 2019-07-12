@@ -17,7 +17,11 @@ class Solver {
 	
 	static _extractInputValuesFromHTML(html) {
 		let $ = cheerio.load(html);
-		return [$("input[name=jschl_vc]").val(), $("input[name=pass]").val()];
+		return {
+			s: $("input[name=s]").val(),
+			vc: $("input[name=jschl_vc]").val(),
+			pass: $("input[name=pass]").val(),
+		};
 	}
 	
 	static _extractChallengeFromHTML(html) {
@@ -73,9 +77,9 @@ class Solver {
 	}
 
 	static solveChallenge(response) {
-		let {html, host, origin} = {html: response.body, host: response.host, origin: response.origin};
-		let script = this._extractChallengeFromHTML(html);
-		let [vc, pass] = [...this._extractInputValuesFromHTML(html)];
+		const {body: html, host, origin} = response;
+		const script = this._extractChallengeFromHTML(html);
+		const {s, vc, pass} = this._extractInputValuesFromHTML(html);
 		
 		try {
 			// Parse only the actual math challenge parts from the script tag and assign them
@@ -84,7 +88,7 @@ class Solver {
 			let answer = this._buildAnswer(challengeMutations, safeEval(challengeInit));
 			answer = parseFloat(answer.toFixed(10)) + host.length;
 			
-			return {vc: vc, pass: pass, answer: answer, origin: origin};
+			return {s, vc, pass, answer, origin};
 		} catch (err) {
 			throw Error(`Could not solve or parse JavaScript challenge. Caused due to error:\n${err}`);
 		}
